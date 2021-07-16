@@ -37,7 +37,15 @@ public class ListData : MonoBehaviour
         //根据奖杯数给json逆序排序
         query = from items in list orderby items.trophy descending select items;
         //修改自己的数据
-        myTrans.ChangeMyItem(query);
+        for (int i = 1; i < query.Count() + 1; i++)
+        {
+            //根据id找到自己的信息并输入到banner上
+            if (query.ElementAt(i - 1).uid == "3716954261")
+            {
+                myTrans.ChangeMyItem(query, i);
+            }
+        }
+
         //创建7个预制件并复用用来展示item
         for (int index = 0; index < 7; index++)
         {
@@ -56,6 +64,13 @@ public class ListData : MonoBehaviour
     }
 
     // ReSharper disable Unity.PerformanceAnalysis
+    /// <summary>
+    ///
+    /// question：ListData为什么要根据内容的text解析index来判断复用？
+    /// 
+    /// answer：通过text解析出来的index确定复用的item应该填充第几条的内容，防止滑动列表内容填充紊乱
+    ///
+    /// </summary>
     //实现列表内元素复用
     private void LoopItem()
     {
@@ -75,6 +90,7 @@ public class ListData : MonoBehaviour
             destroyCount = -1;
             return;
         }
+
         //获取列表中第一条和最后一条的rectTransform用来找到元素的坐标
         RectTransform itemFirstRect = goList.First.Value.transform.GetComponent<RectTransform>();
         RectTransform itemLastRect = goList.Last.Value.transform.GetComponent<RectTransform>();
@@ -111,6 +127,7 @@ public class ListData : MonoBehaviour
                 goList.RemoveLast();
             }
         }
+
         destroyCount = 1;
     }
 }

@@ -12,7 +12,7 @@ public class CLoseAndOpen : MonoBehaviour
     [SerializeField] private GameObject itemList; //获取itemList对象
     [SerializeField] private Text bottonBtnTxt;//按钮文本
     [SerializeField] private RectTransform contentRectTransform;//content
-    [SerializeField] private RectTransform toastParentTransform;
+    public RectTransform toastParentTransform;
 
     //初始化
     private void Awake() 
@@ -20,9 +20,9 @@ public class CLoseAndOpen : MonoBehaviour
         cLoseAndOpen = this;
     }
     //将viewport的rectTransform提供给其他脚本使用
-    public static RectTransform getToastParentTransform()
+    public static CLoseAndOpen GetCLoseAndOpen()
     {
-        return cLoseAndOpen.toastParentTransform;
+        return cLoseAndOpen;
     }
 
     // public GameObject btn;

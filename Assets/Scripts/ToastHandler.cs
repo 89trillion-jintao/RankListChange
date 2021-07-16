@@ -17,7 +17,7 @@ public class ToastHandler : MonoBehaviour
     private void Start()
     {
         //获取viewport作为父节点
-        ToastParentTransform = CLoseAndOpen.getToastParentTransform();
+        ToastParentTransform = CLoseAndOpen.GetCLoseAndOpen().toastParentTransform;
     }
 
     //生成toast并获取点击item的值放在toast上
